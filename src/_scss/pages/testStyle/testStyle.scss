@@ -1,7 +1,6 @@
 .usa-da-test-page {
     @import "layouts/search/search";
     @import "mixins/elementContainerWrap";
-
     @include span-columns(16);
     .page-content {
         @include outer-container();
@@ -11,6 +10,9 @@
         }
         .page-wrapper {
             @include elementContainerWrap();
+            ul + h3 {
+                padding-top: ($global-pad * 2)
+            }
             & .component-wrap {
                 @include row();
                 border: 1px solid #ececec;
@@ -37,9 +39,9 @@
                 @include span-columns(16);
                 li {
                     border: 1px solid #ccc;
-                    margin: 0 0 20px 0;
-                    padding: 20px;
-                    height: 115px;
+                    margin: 0 0 rem(20) 0;
+                    padding: rem(20);
+                    height: rem(115);
                     @include media($small-screen) {
                         @include span-columns(16);
                     }
@@ -52,8 +54,8 @@
                     text-align: center;
                     svg {
                         fill: $color-primary;
-                        height: 45px;
-                        width: 45px;
+                        height: rem(45);
+                        width: rem(45);
                     }
                 }
                 .icon-label {

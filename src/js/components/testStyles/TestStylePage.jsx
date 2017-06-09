@@ -13,14 +13,17 @@ import Header from '../sharedComponents/header/Header';
 import Footer from '../sharedComponents/Footer';
 
 import * as Icons from '../sharedComponents/icons/Icons';
+import * as HpIcons from '../sharedComponents/icons/home/HomeIcons';
+import * as AbIcons from '../sharedComponents/icons/about/AboutIcons';
 
 import IconsExample from './IconsExample';
+import HomepageIcons from './HomepageIcons';
+import AboutIcons from './AboutIcons';
 import ButtonsExample from './ButtonsExample';
 
 export default class TestStylePage extends React.Component {
     render() {
         const icons = [];
-
         _.forEach(Icons, (value, key) => {
             const component = (<IconsExample
                 key={key}
@@ -28,7 +31,23 @@ export default class TestStylePage extends React.Component {
                 label={`Icon.${key}`} />);
             icons.push(component);
         });
+        const homepageicons = [];
+        _.forEach(HpIcons, (value, key) => {
+            const component = (<HomepageIcons
+                key={key}
+                hpicon={value}
+                hplabel={`HomepageIcons.${key}`} />);
+            homepageicons.push(component);
+        });
 
+        const abouticons = [];
+        _.forEach(AbIcons, (value, key) => {
+            const component = (<AboutIcons
+                key={key}
+                abicon={value}
+                ablabel={`AboutIcons.${key}`} />);
+            abouticons.push(component);
+        });
         return (
             <div className="usa-da-test-page">
                 <MetaTags {...MetaTagHelper.stylePageMetaTags} />
@@ -40,6 +59,14 @@ export default class TestStylePage extends React.Component {
                             <h3>Icons</h3>
                             <ul className="icon-list">
                                 {icons}
+                            </ul>
+                            <h3>Homepage Icons</h3>
+                            <ul className="icon-list">
+                                {homepageicons}
+                            </ul>
+                            <h3>About Page Icons</h3>
+                            <ul className="icon-list">
+                                {abouticons}
                             </ul>
                         </div>
                     </div>
