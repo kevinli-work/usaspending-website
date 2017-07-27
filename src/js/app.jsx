@@ -1,5 +1,5 @@
 import React from 'react';
-import Perf from 'react-addons-perf';
+// import Perf from 'react-addons-perf';
 import { render } from 'react-dom';
 import kGlobalConstants from 'GlobalConstants';
 import AppContainer from 'containers/AppContainer';
@@ -15,5 +15,5 @@ render(
 
 if (kGlobalConstants.PERF_LOG) {
     // enable console React performance testing when PERF_LOG is enabled
-    window.Perf = Perf;
+    // window.Perf = Perf;
 }
