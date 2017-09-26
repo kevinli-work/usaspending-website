@@ -15,11 +15,15 @@ import recordReducer from './records/recordReducer';
 import autocompleteAgencyReducer from './search/agencyReducer';
 import recipientReducer from './search/recipientReducer';
 import awardIDReducer from './search/awardIDReducer';
-import budgetCategoryReducer from './search/budgetCategoryReducer';
 import awardReducer from './award/awardReducer';
 import accountReducer from './account/accountReducer';
 import agencyReducer from './agency/agencyReducer';
+import explorerReducer from './explorer/explorerReducer';
 import glossaryReducer from './glossary/glossaryReducer';
+import agencyLandingReducer from './agencyLanding/agencyLandingReducer';
+import cfdaReducer from './search/cfdaReducer';
+import naicsReducer from './search/naicsReducer';
+import pscReducer from './search/pscReducer';
 
 const appReducer = combineReducers({
     resultsMeta: resultsMetaReducer,
@@ -27,16 +31,20 @@ const appReducer = combineReducers({
     filters: filtersReducer,
     searchOrder: orderReducer,
     autocompleteLocations: autocompleteReducer,
+    autocompleteCFDA: cfdaReducer,
+    autocompleteNAICS: naicsReducer,
+    autocompletePSC: pscReducer,
     columnVisibility: columnVisibilityReducer,
     autocompleteAwardIDs: awardIDReducer,
     autocompleteAgencies: autocompleteAgencyReducer,
     autocompleteRecipients: recipientReducer,
     records: recordReducer,
     award: awardReducer,
-    autocompleteBudgetCategories: budgetCategoryReducer,
     account: accountReducer,
     agency: agencyReducer,
-    glossary: glossaryReducer
+    glossary: glossaryReducer,
+    agencyLanding: agencyLandingReducer,
+    explorer: explorerReducer
 });
 
 export default appReducer;

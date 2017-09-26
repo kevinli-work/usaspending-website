@@ -5,19 +5,18 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import moment from 'moment';
-import { convertQuarterToDate } from 'helpers/fiscalYearHelper';
 import * as MoneyFormatter from 'helpers/moneyFormatter';
-import { throttle } from 'lodash';
+import { capitalize, throttle } from 'lodash';
 
 import AgencyObligatedGraph from './ObligatedGraph';
 
 const propTypes = {
     activeFY: PropTypes.string,
-    reportingFiscalQuarter: PropTypes.number,
     agencyName: PropTypes.string,
     obligatedAmount: PropTypes.number,
-    budgetAuthority: PropTypes.number
+    budgetAuthority: PropTypes.number,
+    outlay: PropTypes.number,
+    asOfDate: PropTypes.string
 };
 
 export default class AgencyObligatedAmount extends React.Component {
@@ -54,37 +53,41 @@ export default class AgencyObligatedAmount extends React.Component {
     }
 
     render() {
-        const obligatedValue = this.props.obligatedAmount;
-        const authorityValue = this.props.budgetAuthority;
+        // Move props to variables for readability
+        const obligatedAmount = this.props.obligatedAmount;
+        const budgetAuthority = this.props.budgetAuthority;
 
-        const authUnits = MoneyFormatter.calculateUnitForSingleValue(authorityValue);
-        const authority = `${MoneyFormatter.formatMoney(authorityValue / authUnits.unit)}
-        ${authUnits.longLabel}`;
+        // Generate Budget Authority string
+        const budgetAuthorityAmount = MoneyFormatter
+            .calculateUnitForSingleValue(budgetAuthority);
+        const formattedBudgetAuthority = `${MoneyFormatter
+            .formatMoneyWithPrecision(budgetAuthority / budgetAuthorityAmount.unit, 1)}
+        ${capitalize(budgetAuthorityAmount.longLabel)}`;
 
-        const obUnits = MoneyFormatter.calculateUnitForSingleValue(obligatedValue);
-
-        const amountObligated = `${MoneyFormatter.formatMoney(obligatedValue / obUnits.unit)}
-        ${obUnits.longLabel}`;
-
-        const endOfQuarter = convertQuarterToDate(this.props.reportingFiscalQuarter, this.props.activeFY);
-        const asOfDate = moment(endOfQuarter, "YYYY-MM-DD").format("MMMM D, YYYY");
+        // Generate Obligated Amount string
+        const obligatedAmountValue = MoneyFormatter
+            .calculateUnitForSingleValue(obligatedAmount);
+        const formattedObligatedAmount = `${MoneyFormatter
+            .formatMoneyWithPrecision(obligatedAmount / obligatedAmountValue.unit, 1)}
+        ${capitalize(obligatedAmountValue.longLabel)}`;
 
         const legend = [
             {
                 color: '#5C7480',
-                label: 'Obligations',
+                label: 'Obligated Amount',
                 offset: 0
             },
             {
-                color: '#D6D7D9',
-                label: 'Budget Authority',
-                offset: 100
+                color: '#FBA302',
+                label: 'Outlay Amount',
+                offset: 130
             },
             {
-                color: '#ffffff',
-                label: `*as of ${asOfDate}`,
-                offset: this.state.visualizationWidth - 150
+                color: '#D6D7D9',
+                label: 'Budgetary Resources',
+                offset: 248
             }
+
         ];
 
         return (
@@ -93,15 +96,16 @@ export default class AgencyObligatedAmount extends React.Component {
                 id="agency-obligated-amount">
                 <div className="agency-callout-description">
                     <p>
-                        Agencies spend their available budget authority by making binding
+                        Agencies spend their available budgetary resources by making binding
 financial commitments called <strong>obligations</strong>. An agency incurs an obligation, for
 example, when it places an order, signs a contract, awards a grant, purchases a service, or
 takes other actions that require it to make a payment.
                     </p>
                 </div>
-                <div className="agency-obligated-wrapper">
-                    <div className="agency-obligated-title">
+                <div className="agency-section-wrapper">
+                    <div className="agency-section-title">
                         <h4>Obligated Amount</h4>
+                        <em>Data as of {this.props.asOfDate}</em>
                         <hr
                             className="results-divider"
                             ref={(hr) => {
@@ -110,18 +114,17 @@ takes other actions that require it to make a payment.
                     </div>
                     <div className="agency-obligated-content">
                         <p className="fy-text">
-                            In fiscal year {this.props.activeFY}*, {this.props.agencyName} has obligated
+                            In fiscal year {this.props.activeFY}, {this.props.agencyName} has obligated...
                         </p>
                         <p className="against-auth-text">
-                            <span className="number number-bolder">{amountObligated}</span> against its <span className="number">{authority}</span> in Budget Authority
+                            <span className="number number-bolder">{formattedObligatedAmount}</span> against its <span className="number">{formattedBudgetAuthority}</span> in Budgetary Resources
                         </p>
                         <AgencyObligatedGraph
-                            activeFY={this.props.activeFY}
-                            reportingFiscalQuarter={this.props.reportingFiscalQuarter}
                             obligatedAmount={this.props.obligatedAmount}
                             budgetAuthority={this.props.budgetAuthority}
+                            outlay={this.props.outlay}
                             width={this.state.visualizationWidth}
-                            obligatedText={amountObligated}
+                            obligatedText={formattedObligatedAmount}
                             legend={legend} />
                     </div>
                 </div>

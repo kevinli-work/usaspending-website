@@ -145,6 +145,57 @@ export const fetchFundingAgencies = (req) => {
     };
 };
 
+// CFDA search for autocomplete
+export const fetchCFDA = (req) => {
+    const source = CancelToken.source();
+    return {
+        promise: Axios.request({
+            url: 'v2/autocomplete/cfda/',
+            baseURL: kGlobalConstants.API,
+            method: 'post',
+            data: req,
+            cancelToken: source.token
+        }),
+        cancel() {
+            source.cancel();
+        }
+    };
+};
+
+// NAICS search for autocomplete
+export const fetchNAICS = (req) => {
+    const source = CancelToken.source();
+    return {
+        promise: Axios.request({
+            url: 'v2/autocomplete/naics/',
+            baseURL: kGlobalConstants.API,
+            method: 'post',
+            data: req,
+            cancelToken: source.token
+        }),
+        cancel() {
+            source.cancel();
+        }
+    };
+};
+
+// PSC search for autocomplete
+export const fetchPSC = (req) => {
+    const source = CancelToken.source();
+    return {
+        promise: Axios.request({
+            url: 'v2/autocomplete/psc/',
+            baseURL: kGlobalConstants.API,
+            method: 'post',
+            data: req,
+            cancelToken: source.token
+        }),
+        cancel() {
+            source.cancel();
+        }
+    };
+};
+
 // Fetch Individual Award
 export const fetchAward = (num) => {
     const source = CancelToken.source();
@@ -167,6 +218,91 @@ export const fetchAwardTransaction = (params) => {
     return {
         promise: Axios.request({
             url: `v1/transactions/`,
+            baseURL: kGlobalConstants.API,
+            method: 'post',
+            data: params,
+            cancelToken: source.token
+        }),
+        cancel() {
+            source.cancel();
+        }
+    };
+};
+
+// Spending Over Time Visualization Endpoint
+export const performSpendingOverTimeSearch = (params) => {
+    const source = CancelToken.source();
+    return {
+        promise: Axios.request({
+            url: `v2/search/spending_over_time/`,
+            baseURL: kGlobalConstants.API,
+            method: 'post',
+            data: params,
+            cancelToken: source.token
+        }),
+        cancel() {
+            source.cancel();
+        }
+    };
+};
+
+// Spending By Category Visualization Endpoint
+export const performSpendingByCategorySearch = (params) => {
+    const source = CancelToken.source();
+    return {
+        promise: Axios.request({
+            url: `v2/search/spending_by_category/`,
+            baseURL: kGlobalConstants.API,
+            method: 'post',
+            data: params,
+            cancelToken: source.token
+        }),
+        cancel() {
+            source.cancel();
+        }
+    };
+};
+
+// Spending By Geography Visualization Endpoint
+export const performSpendingByGeographySearch = (params) => {
+    const source = CancelToken.source();
+    return {
+        promise: Axios.request({
+            url: `v2/search/spending_by_geography/`,
+            baseURL: kGlobalConstants.API,
+            method: 'post',
+            data: params,
+            cancelToken: source.token
+        }),
+        cancel() {
+            source.cancel();
+        }
+    };
+};
+
+// Spending By Award Tab Count Endpoint
+export const performSpendingByAwardTabCountSearch = (params) => {
+    const source = CancelToken.source();
+    return {
+        promise: Axios.request({
+            url: 'v2/search/spending_by_award_count/',
+            baseURL: kGlobalConstants.API,
+            method: 'post',
+            data: params,
+            cancelToken: source.token
+        }),
+        cancel() {
+            source.cancel();
+        }
+    };
+};
+
+// Spending By Award Table Endpoint
+export const performSpendingByAwardSearch = (params) => {
+    const source = CancelToken.source();
+    return {
+        promise: Axios.request({
+            url: `v2/search/spending_by_award/`,
             baseURL: kGlobalConstants.API,
             method: 'post',
             data: params,
@@ -338,6 +474,21 @@ export const restoreUrlHash = (data) => {
             url: 'v1/references/hash/',
             baseURL: kGlobalConstants.API,
             method: 'post',
+            cancelToken: source.token
+        }),
+        cancel() {
+            source.cancel();
+        }
+    };
+};
+
+export const fetchLastUpdate = () => {
+    const source = CancelToken.source();
+    return {
+        promise: Axios.request({
+            url: 'v2/awards/last_updated/',
+            baseURL: kGlobalConstants.API,
+            method: 'get',
             cancelToken: source.token
         }),
         cancel() {

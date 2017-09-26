@@ -18,7 +18,10 @@ const propTypes = {
     minorObjectClasses: PropTypes.object,
     totalObligation: PropTypes.number,
     totalMinorObligation: PropTypes.number,
-    showMinorObjectClasses: PropTypes.func
+    showMinorObjectClasses: PropTypes.func,
+    asOfDate: PropTypes.string,
+    hasNegatives: PropTypes.bool,
+    minorHasNegatives: PropTypes.bool
 };
 
 export default class ObjectClassTreeMap extends React.Component {
@@ -66,7 +69,7 @@ export default class ObjectClassTreeMap extends React.Component {
     }
 
     generateHeader() {
-        let header = "Hover over a segment for more information";
+        let header = '';
 
         if (this.state.showMinorObjectClass === true) {
             header = (<button
@@ -84,7 +87,8 @@ export default class ObjectClassTreeMap extends React.Component {
             {...this.state}
             majorObjectClasses={this.props.majorObjectClasses}
             totalObligation={this.props.totalObligation}
-            toggleMinorObjectClass={this.toggleMinorObjectClass} />);
+            toggleMinorObjectClass={this.toggleMinorObjectClass}
+            hasNegatives={this.props.hasNegatives} />);
 
         if (this.state.showMinorObjectClass === true) {
             const selectedMajorObjectClass = find(this.props.majorObjectClasses.children,
@@ -96,7 +100,8 @@ export default class ObjectClassTreeMap extends React.Component {
                 minorObjectClasses={this.props.minorObjectClasses}
                 totalObligation={this.props.totalObligation}
                 totalMinorObligation={this.props.totalMinorObligation}
-                toggleMinorObjectClass={this.toggleMinorObjectClass} />);
+                toggleMinorObjectClass={this.toggleMinorObjectClass}
+                hasNegatives={this.props.minorHasNegatives} />);
         }
 
         return objectClasses;
@@ -116,6 +121,7 @@ export default class ObjectClassTreeMap extends React.Component {
                 </div>
                 <div className="agency-section-title">
                     <h4>Object Classes</h4>
+                    <em>Data as of {this.props.asOfDate}</em>
                     <hr className="results-divider" />
                 </div>
                 <div className="agency-section-content">
@@ -129,6 +135,7 @@ export default class ObjectClassTreeMap extends React.Component {
                         </div>
                         {this.generateObjectClasses()}
                     </div>
+                    <div className="agency-viz-description">This visualization represents obligated amount.</div>
                 </div>
             </div>
         );

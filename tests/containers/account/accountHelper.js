@@ -1,4 +1,5 @@
 import { mockAccountProgramActivities } from './filters/mockAccountProgramActivities';
+import { mockAvailableOC } from './filters/mockObjectClass';
 import { mockAccount, mockBalances } from './mockAccount';
 
 // Fetch Program Activities
@@ -36,6 +37,32 @@ export const fetchTasBalanceTotals = () => (
             process.nextTick(() => {
                 resolve({
                     data: mockBalances.outlay
+                });
+            });
+        }),
+        cancel: jest.fn()
+    }
+);
+
+export const fetchTasCategoryTotals = () => (
+    {
+        promise: new Promise((resolve) => {
+            process.nextTick(() => {
+                resolve({
+                    data: mockBalances.outlay
+                });
+            });
+        }),
+        cancel: jest.fn()
+    }
+);
+
+export const fetchAvailableObjectClasses = () => (
+    {
+        promise: new Promise((resolve) => {
+            process.nextTick(() => {
+                resolve({
+                    data: mockAvailableOC
                 });
             });
         }),

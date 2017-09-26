@@ -9,13 +9,18 @@ import TimePeriodFYFilterGroup from './TimePeriodFYFilterGroup';
 import TimePeriodDRFilterGroup from './TimePeriodDRFilterGroup';
 import AwardTypeFilterGroup from './AwardTypeFilterGroup';
 import LocationFilterGroup from './LocationFilterGroup';
-import BudgetCategoryFilterGroup from './BudgetCategoryFilterGroup';
 import AgencyFilterGroup from './AgencyFilterGroup';
 import RecipientFilterGroup from './RecipientFilterGroup';
 import RecipientTypeFilterGroup from './RecipientTypeFilterGroup';
 import KeywordFilterGroup from './KeywordFilterGroup';
 import AwardIDFilterGroup from './AwardIDFilterGroup';
 import AwardAmountFilterGroup from './AwardAmountFilterGroup';
+import CFDAFilterGroup from './CFDAFilterGroup';
+import NAICSFilterGroup from './NAICSFilterGroup';
+import PSCFilterGroup from './PSCFilterGroup';
+import PricingTypeFilterGroup from './PricingTypeFilterGroup';
+import SetAsideFilterGroup from './SetAsideFilterGroup';
+import ExtentCompetedFilterGroup from './ExtentCompetedFilterGroup';
 
 export const topFilterGroupGenerator = (config = {
     filter: {
@@ -38,12 +43,6 @@ export const topFilterGroupGenerator = (config = {
             return (<LocationFilterGroup
                 key={groupKey} {...config}
                 toggle="locationDomesticForeign" />);
-        case 'budgetFunctions':
-            return <BudgetCategoryFilterGroup key={groupKey} {...config} />;
-        case 'federalAccounts':
-            return <BudgetCategoryFilterGroup key={groupKey} {...config} />;
-        case 'objectClasses':
-            return <BudgetCategoryFilterGroup key={groupKey} {...config} />;
         case 'selectedFundingAgencies':
             return <AgencyFilterGroup key={groupKey} {...config} />;
         case 'selectedAwardingAgencies':
@@ -60,6 +59,18 @@ export const topFilterGroupGenerator = (config = {
             return (<AwardIDFilterGroup key={groupKey} {...config} />);
         case 'awardAmounts':
             return (<AwardAmountFilterGroup key={groupKey} {...config} />);
+        case 'selectedCFDA':
+            return (<CFDAFilterGroup key={groupKey} {...config} />);
+        case 'selectedNAICS':
+            return (<NAICSFilterGroup key={groupKey} {...config} />);
+        case 'selectedPSC':
+            return (<PSCFilterGroup key={groupKey} {...config} />);
+        case 'pricingType':
+            return (<PricingTypeFilterGroup key={groupKey} {...config} />);
+        case 'setAside':
+            return (<SetAsideFilterGroup key={groupKey} {...config} />);
+        case 'extentCompeted':
+            return (<ExtentCompetedFilterGroup key={groupKey} {...config} />);
         default:
             return null;
     }

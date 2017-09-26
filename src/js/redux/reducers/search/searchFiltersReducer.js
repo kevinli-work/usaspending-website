@@ -11,7 +11,9 @@ import * as AgencyFilterFunctions from './filters/agencyFilterFunctions';
 import * as RecipientFilterFunctions from './filters/recipientFilterFunctions';
 import * as AwardIDFilterFunctions from './filters/awardIDFilterFunctions';
 import * as AwardAmountFilterFunctions from './filters/awardAmountFilterFunctions';
-import * as BudgetCategoryFilterFunctions from './filters/budgetCategoryFilterFunctions';
+import * as OtherFilterFunctions from './filters/OtherFilterFunctions';
+import * as FiscalYearHelper from '../../../helpers/fiscalYearHelper';
+import * as ContractFilterFunctions from './filters/contractFilterFunctions';
 
 // update this version when changes to the reducer structure are made
 // frontend will reject inbound hashed search filter sets with different versions because the
@@ -21,9 +23,6 @@ export const filterStoreVersion = 1;
 export const requiredTypes = {
     timePeriodFY: Set,
     selectedLocations: OrderedMap,
-    budgetFunctions: OrderedMap,
-    federalAccounts: OrderedMap,
-    objectClasses: Set,
     selectedFundingAgencies: OrderedMap,
     selectedAwardingAgencies: OrderedMap,
     selectedRecipients: OrderedMap,
@@ -31,20 +30,23 @@ export const requiredTypes = {
     selectedRecipientLocations: OrderedMap,
     awardType: Set,
     selectedAwardIDs: OrderedMap,
-    awardAmounts: OrderedMap
+    awardAmounts: OrderedMap,
+    selectedCFDA: OrderedMap,
+    selectedNAICS: OrderedMap,
+    selectedPSC: OrderedMap,
+    pricingType: Set,
+    setAside: Set,
+    extentCompeted: Set
 };
 
 export const initialState = {
     keyword: '',
     timePeriodType: 'fy',
-    timePeriodFY: new Set(),
+    timePeriodFY: new Set([`${FiscalYearHelper.currentFiscalYear()}`]),
     timePeriodStart: null,
     timePeriodEnd: null,
     selectedLocations: new OrderedMap(),
     locationDomesticForeign: 'all',
-    budgetFunctions: new OrderedMap(),
-    federalAccounts: new OrderedMap(),
-    objectClasses: new Set(),
     selectedFundingAgencies: new OrderedMap(),
     selectedAwardingAgencies: new OrderedMap(),
     selectedRecipients: new OrderedMap(),
@@ -53,7 +55,13 @@ export const initialState = {
     selectedRecipientLocations: new OrderedMap(),
     awardType: new Set(),
     selectedAwardIDs: new OrderedMap(),
-    awardAmounts: new OrderedMap()
+    awardAmounts: new OrderedMap(),
+    selectedCFDA: new OrderedMap(),
+    selectedNAICS: new OrderedMap(),
+    selectedPSC: new OrderedMap(),
+    pricingType: new Set(),
+    setAside: new Set(),
+    extentCompeted: new Set()
 };
 
 const searchFiltersReducer = (state = initialState, action) => {
@@ -86,34 +94,6 @@ const searchFiltersReducer = (state = initialState, action) => {
         case 'UPDATE_DOMESTIC_FOREIGN': {
             return Object.assign({}, state, {
                 locationDomesticForeign: action.selection
-            });
-        }
-
-        // Budget Categories Filter
-        case 'UPDATE_SELECTED_BUDGET_FUNCTIONS': {
-            return Object.assign({}, state, {
-                budgetFunctions: BudgetCategoryFilterFunctions.updateBudgetFunctions(
-                    state.budgetFunctions, action.budgetFunction)
-            });
-        }
-
-        case 'UPDATE_SELECTED_FEDERAL_ACCOUNTS': {
-            return Object.assign({}, state, {
-                federalAccounts: BudgetCategoryFilterFunctions.updateFederalAccounts(
-                    state.federalAccounts, action.federalAccount)
-            });
-        }
-
-        case 'UPDATE_SELECTED_OBJECT_CLASSES': {
-            return Object.assign({}, state, {
-                objectClasses: BudgetCategoryFilterFunctions.updateObjectClasses(
-                    state.objectClasses, action.objectClass)
-            });
-        }
-        case 'BULK_SEARCH_FILTER_OBJECT_CLASSES': {
-            return Object.assign({}, state, {
-                objectClasses: BudgetCategoryFilterFunctions.bulkObjectClassesChange(
-                    state.objectClasses, action.objectClasses, action.direction)
             });
         }
 
@@ -194,6 +174,54 @@ const searchFiltersReducer = (state = initialState, action) => {
             return Object.assign({}, state, {
                 awardAmounts: AwardAmountFilterFunctions.updateAwardAmounts(
                     state.awardAmounts, action.awardAmounts)
+            });
+        }
+
+        // CFDA Filter
+        case 'UPDATE_SELECTED_CFDA': {
+            return Object.assign({}, state, {
+                selectedCFDA: OtherFilterFunctions.updateSelectedCFDA(
+                    state.selectedCFDA, action.cfda)
+            });
+        }
+
+        // NAICS Filter
+        case 'UPDATE_SELECTED_NAICS': {
+            return Object.assign({}, state, {
+                selectedNAICS: OtherFilterFunctions.updateSelectedNAICS(
+                    state.selectedNAICS, action.naics)
+            });
+        }
+
+        // PSC Filter
+        case 'UPDATE_SELECTED_PSC': {
+            return Object.assign({}, state, {
+                selectedPSC: OtherFilterFunctions.updateSelectedPSC(
+                    state.selectedPSC, action.psc)
+            });
+        }
+
+        // Pricing Type Filter
+        case 'UPDATE_PRICING_TYPE': {
+            return Object.assign({}, state, {
+                pricingType: ContractFilterFunctions.updateContractFilterSet(
+                    state.pricingType, action.pricingType)
+            });
+        }
+
+        // Set Aside Filter
+        case 'UPDATE_SET_ASIDE': {
+            return Object.assign({}, state, {
+                setAside: ContractFilterFunctions.updateContractFilterSet(
+                    state.setAside, action.setAside)
+            });
+        }
+
+        // Extent Competed Filter
+        case 'UPDATE_EXTENT_COMPETED': {
+            return Object.assign({}, state, {
+                extentCompeted: ContractFilterFunctions.updateContractFilterSet(
+                    state.extentCompeted, action.extentCompeted)
             });
         }
 

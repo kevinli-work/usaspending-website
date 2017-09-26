@@ -5,11 +5,13 @@
 
 import { Set, OrderedMap } from 'immutable';
 
+import * as FiscalYearHelper from '../../src/js/helpers/fiscalYearHelper';
+
 export const defaultFilters = {
     keyword: '',
     awardType: new Set(),
     timePeriodType: 'fy',
-    timePeriodFY: new Set(),
+    timePeriodFY: new Set([`${FiscalYearHelper.currentFiscalYear()}`]),
     timePeriodStart: null,
     timePeriodEnd: null,
     selectedLocations: new OrderedMap(),
@@ -24,7 +26,13 @@ export const defaultFilters = {
     recipientType: new Set(),
     selectedRecipientLocations: new OrderedMap(),
     selectedAwardIDs: new OrderedMap(),
-    awardAmounts: new OrderedMap()
+    awardAmounts: new OrderedMap(),
+    selectedCFDA: new OrderedMap(),
+    selectedNAICS: new OrderedMap(),
+    selectedPSC: new OrderedMap(),
+    pricingType: new Set(),
+    setAside: new Set(),
+    extentCompeted: new Set()
 };
 
 export const defaultResultsMeta = {

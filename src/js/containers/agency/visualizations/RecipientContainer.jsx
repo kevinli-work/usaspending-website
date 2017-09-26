@@ -16,7 +16,8 @@ import RecipientVisualization from
 
 const propTypes = {
     id: PropTypes.string,
-    activeFY: PropTypes.string
+    activeFY: PropTypes.string,
+    lastUpdate: PropTypes.string
 };
 
 export default class RecipientContainer extends React.PureComponent {
@@ -70,12 +71,18 @@ export default class RecipientContainer extends React.PureComponent {
             error: false
         });
 
-        this.request = AgencyHelper.fetchAwardRecipients({
+        const params = {
             fiscal_year: fy,
             awarding_agency_id: id,
             limit: 10,
             page: pageNumber
-        });
+        };
+
+        if (this.state.scope !== 'all') {
+            params.award_category = this.state.scope;
+        }
+
+        this.request = AgencyHelper.fetchAwardRecipients(params);
 
         this.request.promise
             .then((res) => {
@@ -168,7 +175,8 @@ ${recipient}`;
                 error={this.state.error}
                 scope={this.state.scope}
                 changeScope={this.changeScope}
-                changePage={this.changePage} />
+                changePage={this.changePage}
+                lastUpdate={this.props.lastUpdate} />
         );
     }
 }

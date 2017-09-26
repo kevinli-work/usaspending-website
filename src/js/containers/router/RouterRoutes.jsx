@@ -39,6 +39,24 @@ const routes = {
             }
         },
         {
+            path: '/explorer',
+            parent: '/explorer',
+            component: (cb) => {
+                require.ensure([], (require) => {
+                    cb(require('components/explorer/landing/ExplorerLanding').default);
+                });
+            }
+        },
+        {
+            path: '/explorer/:root',
+            parent: '/explorer',
+            component: (cb) => {
+                require.ensure([], (require) => {
+                    cb(require('containers/explorer/detail/ExplorerDetailPageContainer').default);
+                });
+            }
+        },
+        {
             path: '/award/:awardId',
             parent: '/award',
             component: (cb) => {
@@ -136,10 +154,23 @@ const routes = {
                     cb(require('components/testStyles/TestStylePage').default);
                 });
             }
+        },
+        {
+            path: '/agency',
+            parent: '/agency',
+            component: (cb) => {
+                require.ensure([], (require) => {
+                    cb(require('components/agencyLanding/AgencyLandingPage').default);
+                });
+            }
         }
     ],
-    notfound: {
-        // TODO: Kevin Li - add 404 page handling
+    notFound: {
+        component: (cb) => {
+            require.ensure([], (require) => {
+                cb(require('components/errorPage/ErrorPage').default);
+            });
+        }
     }
 };
 
