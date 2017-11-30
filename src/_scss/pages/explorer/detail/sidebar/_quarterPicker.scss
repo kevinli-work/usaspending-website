@@ -1,0 +1,29 @@
+.explorer-quarter-picker {
+    .quarters-list {
+        .quarter-item {
+            padding: rem(5) rem(16);
+            margin: 0 rem(1);
+            font-size: rem(12);
+            background-color: $color-gray-medium;
+            color: $color-gray-lighter;
+            &:first-child {
+                border-bottom-left-radius: rem(15);
+                border-top-left-radius: rem(15);
+                padding-left: rem(20);
+            }
+            &:last-child {
+                border-bottom-right-radius: rem(15);
+                border-top-right-radius: rem(15);
+                padding-right: rem(20);
+            }
+            &.hover {
+                background-color: $color-primary-alt-dark;
+                color: $color-white;
+            }
+            &.selected {
+                background-color: $color-primary;
+                color: $color-white;
+            }
+        }
+    }
+}

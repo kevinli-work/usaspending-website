@@ -12,7 +12,14 @@
     background-color: $color-gray-dark;
     color: $color-white;
     @import "./_home";
-    @import "./_fy";
-    @import "./_fyPicker";
     @import "./_trail";
+    .time-period-section {
+        background-color: #272F38;
+        border-top: 1px solid $color-gray;
+        border-bottom: 1px solid $color-gray;
+        padding: rem(20) rem(40);
+        @import 'elements/_titleSelector';
+        @import "./_fyPicker";
+        @import "./_quarterPicker";
+    }
 }

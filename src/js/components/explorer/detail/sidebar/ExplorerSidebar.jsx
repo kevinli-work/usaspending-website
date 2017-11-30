@@ -6,10 +6,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Home, Calendar, AngleRight } from 'components/sharedComponents/icons/Icons';
+import { Home, Calendar } from 'components/sharedComponents/icons/Icons';
 
 import FYPicker from './FYPicker';
 import VerticalTrail from './VerticalTrail';
+import QuarterPicker from './QuarterPicker';
 
 const propTypes = {
     fy: PropTypes.string,
@@ -23,33 +24,25 @@ export default class ExplorerSidebar extends React.Component {
         super(props);
 
         this.state = {
-            showFYMenu: false
+            // TODO - Lizzie: move to Redux
+            selectedQuarter: '2'
         };
 
-        this.toggleFYMenu = this.toggleFYMenu.bind(this);
         this.pickedYear = this.pickedYear.bind(this);
-    }
-
-    toggleFYMenu() {
-        this.setState({
-            showFYMenu: !this.state.showFYMenu
-        });
+        this.pickedQuarter = this.pickedQuarter.bind(this);
     }
 
     pickedYear(year) {
-        this.props.setExplorerYear(year);
+        this.props.setExplorerYear(`${year}`);
+    }
+
+    pickedQuarter(quarter) {
         this.setState({
-            showFYMenu: false
+            selectedQuarter: quarter
         });
     }
 
     render() {
-        let fyPicker = null;
-        if (this.state.showFYMenu) {
-            fyPicker = (<FYPicker
-                pickedYear={this.pickedYear} />);
-        }
-
         return (
             <div className="explorer-sidebar">
                 <div className="start-over">
@@ -67,31 +60,24 @@ export default class ExplorerSidebar extends React.Component {
                     </a>
                 </div>
 
-                <div className="fy-item">
-                    <button
-                        className="fy-button"
-                        onClick={this.toggleFYMenu}
-                        disabled>
-                        <div className="content">
-                            <div className="icon">
-                                <Calendar alt="Pick fiscal year" />
-                            </div>
-                            <div className="label">
-                                {this.props.fy}
-                            </div>
-                            <div className="icon arrow">
-                                <AngleRight alt="Show menu" />
-                            </div>
+                <div className="time-period-section">
+                    <div className="fy-section">
+                        <div className="icon">
+                            <Calendar alt="Pick fiscal year" />
                         </div>
-                    </button>
+                        <FYPicker
+                            pickedYear={this.pickedYear}
+                            fy={this.props.fy} />
+                    </div>
+                    <QuarterPicker
+                        pickedQuarter={this.pickedQuarter}
+                        fy={this.props.fy}
+                        quarter={this.state.selectedQuarter} />
                 </div>
-
-                {fyPicker}
 
                 <VerticalTrail
                     trail={this.props.trail.toArray()}
                     rewindToFilter={this.props.rewindToFilter} />
-
             </div>
         );
     }

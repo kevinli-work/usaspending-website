@@ -98,3 +98,26 @@ export const convertDateToQuarter = (date) => {
 
     return quarter;
 };
+
+export const convertQuarterToCumulativeDateRange = (qtr, year) => {
+    // returns the dates that a cumulative quarter spans
+    let date = '';
+    const outputYear = parseInt(year, 10);
+    switch (qtr) {
+        case 1:
+            date = `OCT 1, ${outputYear - 1} - DEC 31, ${outputYear - 1}`;
+            break;
+        case 2:
+            date = `OCT 1, ${outputYear - 1} - MAR 31, ${outputYear}`;
+            break;
+        case 3:
+            date = `OCT 1, ${outputYear - 1} - JUN 30, ${outputYear}`;
+            break;
+        case 4:
+            date = `OCT 1, ${outputYear - 1} - SEP 30, ${outputYear}`;
+            break;
+        default:
+            date = '';
+    }
+    return date;
+};

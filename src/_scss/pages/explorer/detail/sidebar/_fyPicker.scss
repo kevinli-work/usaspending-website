@@ -1,30 +1,34 @@
-.explorer-fy-picker {
-    position: absolute;
-    top: rem(90);
-    left: rem(300);
-    z-index: $z-modal;
+.fy-section {
+    @include display(flex);
+    position: relative;
+    padding-bottom: rem(15);
+    .icon {
+        @include flex(0 0 auto);
+        width: rem(30);
+        height: rem(30);
+        margin-right: rem(25);
 
-    ul.fy-list {
-        @include unstyled-list;
-        border: 1px solid $color-gray-dark;
-
-        li {
-            width: rem(140);
-            border-top: 1px solid $color-gray;
-            background-color: #272F38;
-
-            &:first-child {
-                border-top: none;
+        svg {
+            fill: $color-white;
+            width: rem(30);
+            height: rem(30);
+        }
+    }
+    .explorer-fy-picker {
+        float: none;
+        clear: none;
+        .fy-button {
+            border: 0;
+            font-weight: 400;
+            font-size: rem(24);
+            line-height: rem(28);
+            .label {
+                border-bottom: solid 1px $color-gray;
             }
-
-            button.fy-item {
-                @include button-unstyled;
-                width: 100%;
-                padding: rem(10) rem(20);
-                color: $color-white;
-                font-size: $small-font-size;
-                text-align: center;
-            }
+        }
+        .field-list {
+            width: auto;
+            border: 0;
         }
     }
 }
