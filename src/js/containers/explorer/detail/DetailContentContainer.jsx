@@ -24,6 +24,7 @@ const propTypes = {
     explorer: PropTypes.object,
     setExplorerActive: PropTypes.func,
     setExplorerYear: PropTypes.func,
+    setExplorerQuarter: PropTypes.func,
     overwriteExplorerTrail: PropTypes.func,
     addExplorerTrail: PropTypes.func,
     showTooltip: PropTypes.func,
@@ -400,8 +401,10 @@ export class DetailContentContainer extends React.Component {
             <div className="explorer-detail">
                 <ExplorerSidebar
                     fy={this.props.explorer.fy}
+                    quarter={this.props.explorer.quarter}
                     trail={this.props.explorer.trail}
                     setExplorerYear={this.props.setExplorerYear}
+                    setExplorerQuarter={this.props.setExplorerQuarter}
                     rewindToFilter={this.rewindToFilter} />
                 <DetailContent
                     isRoot={this.props.explorer.active.within === 'root'}

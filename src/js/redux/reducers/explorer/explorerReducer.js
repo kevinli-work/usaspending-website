@@ -15,6 +15,8 @@ export const ActiveScreen = new Record({
 export const initialState = {
     root: 'object_class',
     fy: `${defaultFiscalYear()}`,
+    // TODO - Lizzie: remove hard-coded value
+    quarter: '2',
     active: new ActiveScreen(),
     trail: new List([]),
     table: {
@@ -31,6 +33,11 @@ const explorerReducer = (state = initialState, action) => {
         case 'SET_EXPLORER_FY': {
             return Object.assign({}, state, {
                 fy: action.fy
+            });
+        }
+        case 'SET_EXPLORER_QUARTER': {
+            return Object.assign({}, state, {
+                quarter: action.quarter
             });
         }
         case 'SET_EXPLORER_ROOT': {

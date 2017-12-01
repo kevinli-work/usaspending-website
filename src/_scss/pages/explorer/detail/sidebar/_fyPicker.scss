@@ -29,6 +29,18 @@
         .field-list {
             width: auto;
             border: 0;
+            ul {
+                width: rem(120);
+                .field-item {
+                    .item-button {
+                        padding: rem(5) rem(10);
+                        font-size: rem(16);
+                        &:hover {
+                            background-color: $color-gray-lightest;
+                        }
+                    }
+                }
+            }
         }
     }
 }

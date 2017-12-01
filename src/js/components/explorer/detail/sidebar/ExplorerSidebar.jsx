@@ -14,19 +14,16 @@ import QuarterPicker from './QuarterPicker';
 
 const propTypes = {
     fy: PropTypes.string,
+    quarter: PropTypes.string,
     trail: PropTypes.object,
     setExplorerYear: PropTypes.func,
+    setExplorerQuarter: PropTypes.func,
     rewindToFilter: PropTypes.func
 };
 
 export default class ExplorerSidebar extends React.Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            // TODO - Lizzie: move to Redux
-            selectedQuarter: '2'
-        };
 
         this.pickedYear = this.pickedYear.bind(this);
         this.pickedQuarter = this.pickedQuarter.bind(this);
@@ -37,9 +34,7 @@ export default class ExplorerSidebar extends React.Component {
     }
 
     pickedQuarter(quarter) {
-        this.setState({
-            selectedQuarter: quarter
-        });
+        this.props.setExplorerQuarter(quarter);
     }
 
     render() {
@@ -72,7 +67,7 @@ export default class ExplorerSidebar extends React.Component {
                     <QuarterPicker
                         pickedQuarter={this.pickedQuarter}
                         fy={this.props.fy}
-                        quarter={this.state.selectedQuarter} />
+                        quarter={this.props.quarter} />
                 </div>
 
                 <VerticalTrail

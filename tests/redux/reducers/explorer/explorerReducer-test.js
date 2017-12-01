@@ -15,6 +15,17 @@ describe('explorerReducer', () => {
         });
     });
 
+    describe('SET_EXPLORER_QUARTER', () => {
+        it('should update the quarter to the given value', () => {
+            const action = {
+                type: 'SET_EXPLORER_QUARTER',
+                quarter: '5'
+            };
+            const state = explorerReducer(undefined, action);
+            expect(state.quarter).toEqual('5');
+        });
+    });
+
     describe('SET_EXPLORER_ROOT', () => {
         it('should set the root to the given value', () => {
             const action = {

@@ -13,6 +13,11 @@ export const setExplorerYear = (state) => ({
     fy: state
 });
 
+export const setExplorerQuarter = (state) => ({
+    type: 'SET_EXPLORER_QUARTER',
+    quarter: state
+});
+
 export const setExplorerActive = (state) => ({
     type: 'SET_EXPLORER_ACTIVE',
     active: state
