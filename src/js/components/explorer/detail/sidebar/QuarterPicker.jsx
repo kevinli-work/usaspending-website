@@ -70,7 +70,7 @@ export default class QuarterPicker extends React.Component {
                     onClick={this.pickedQuarter}
                     onMouseEnter={this.hoveredOverQuarter}
                     onMouseLeave={this.resetHover}>
-                    Q {quarter}
+                    Q{quarter}
                 </button>
             );
 

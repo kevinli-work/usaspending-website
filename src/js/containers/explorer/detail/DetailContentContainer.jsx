@@ -46,6 +46,7 @@ export class DetailContentContainer extends React.Component {
         };
 
         this.request = null;
+        this.quarterRequest = null;
 
         this.goDeeper = this.goDeeper.bind(this);
         this.changeSubdivisionType = this.changeSubdivisionType.bind(this);
@@ -53,6 +54,7 @@ export class DetailContentContainer extends React.Component {
     }
 
     componentDidMount() {
+        this.getCurrentQuarter();
         this.prepareRootRequest(this.props.explorer.root, this.props.explorer.fy);
     }
 
@@ -65,6 +67,33 @@ export class DetailContentContainer extends React.Component {
             // fy changed, also reload everything (and rewind to the root)
             this.prepareRootRequest(this.props.explorer.root, this.props.explorer.fy);
         }
+    }
+
+    getCurrentQuarter() {
+        // TODO - Lizzie: uncomment when API is ready
+
+        this.props.setExplorerQuarter('2');
+
+        // if (this.quarterRequest) {
+        //    this.quarterRequest.cancel();
+        // }
+
+        // perform the API request
+        // this.quarterRequest = ExplorerHelper.fetchCurrentQuarter();
+        //
+        // this.quarterRequest.promise
+        //    .then((res) => {
+        //        if (res.data.quarter) {
+        //            this.props.setExplorerQuarter(res.data.quarter);
+        //        }
+        //        this.quarterRequest = null;
+        //    })
+        //    .catch((err) => {
+        //        if (!isCancel(err)) {
+        //            console.log(err);
+        //            this.quarterRequest = null;
+        //        }
+        //    });
     }
 
     prepareRootRequest(rootType, fy) {

@@ -7,6 +7,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Home, Calendar } from 'components/sharedComponents/icons/Icons';
+import * as fiscalYearHelper from 'helpers/fiscalYearHelper';
 
 import FYPicker from './FYPicker';
 import VerticalTrail from './VerticalTrail';
@@ -31,6 +32,13 @@ export default class ExplorerSidebar extends React.Component {
 
     pickedYear(year) {
         this.props.setExplorerYear(`${year}`);
+
+        // If a past FY was selected, default to the last quarter
+        const currentFiscalYear = fiscalYearHelper.currentFiscalYear();
+        console.log(currentFiscalYear);
+        if (parseInt(year, 10) !== currentFiscalYear) {
+            this.props.setExplorerQuarter('4');
+        }
     }
 
     pickedQuarter(quarter) {

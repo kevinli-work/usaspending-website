@@ -16,7 +16,7 @@ export const initialState = {
     root: 'object_class',
     fy: `${defaultFiscalYear()}`,
     // TODO - Lizzie: remove hard-coded value
-    quarter: '2',
+    quarter: '4',
     active: new ActiveScreen(),
     trail: new List([]),
     table: {

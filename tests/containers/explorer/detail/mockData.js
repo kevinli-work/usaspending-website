@@ -180,6 +180,7 @@ export const mockPager = {
 export const mockActions = {
     setExplorerRoot: jest.fn(),
     setExplorerYear: jest.fn(),
+    setExplorerQuarter: jest.fn(),
     setExplorerActive: jest.fn(),
     addExplorerTrail: jest.fn(),
     overwriteExplorerTrail: jest.fn(),

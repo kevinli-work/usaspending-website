@@ -10,3 +10,16 @@ export const fetchBreakdown = () => ({
     }),
     cancel: jest.fn()
 });
+
+export const fetchCurrentQuarter = () => ({
+    promise: new Promise((resolve) => {
+        process.nextTick(() => {
+            resolve({
+                data: {
+                    quarter: '2'
+                }
+            });
+        });
+    }),
+    cancel: jest.fn()
+});
