@@ -29,7 +29,8 @@ const propTypes = {
     padding: PropTypes.object,
     legend: PropTypes.array,
     activeLabel: PropTypes.object,
-    visualizationPeriod: PropTypes.string
+    visualizationPeriod: PropTypes.string,
+    title: PropTypes.string
 };
 /* eslint-enable react/no-unused-prop-types */
 
@@ -39,7 +40,8 @@ const defaultProps = {
         bottom: 50
     },
     enableHighlight: true,
-    legend: []
+    legend: [],
+    title: 'Bar Chart'
 };
 
 export default class BarChart extends React.Component {
@@ -388,8 +390,13 @@ export default class BarChart extends React.Component {
                 ref={(div) => {
                     this.divRef = div;
                 }}>
+                <div className="sr-only">
+                    The following figure is an interactive bar chart. Enter into the chart to view details about specific data points.
+                </div>
                 <svg
                     className="bar-graph"
+                    role="figure"
+                    aria-label={this.props.title}
                     width={this.props.width}
                     height={this.props.height + 20}
                     ref={(svg) => {

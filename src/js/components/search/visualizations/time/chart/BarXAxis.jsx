@@ -197,7 +197,8 @@ export default class BarXAxis extends React.Component {
         return (
             <g
                 className="bar-axis"
-                transform={`translate(${this.props.padding.left},${this.props.top})`}>
+                transform={`translate(${this.props.padding.left},${this.props.top})`}
+                aria-hidden="true">
                 <title>X-Axis</title>
                 <desc>
                     {this.state.description}

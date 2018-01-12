@@ -111,7 +111,9 @@ export default class BarYAxis extends React.Component {
 
     render() {
         return (
-            <g className="bar-axis">
+            <g
+                className="bar-axis"
+                aria-hidden="true">
                 <title>Y-Axis</title>
                 <desc>
                     {this.state.description}

@@ -41,6 +41,8 @@ export default class TimeVisualizationPeriodButton extends React.Component {
                 value={this.props.value}
                 title={description}
                 aria-label={description}
+                role="menuitemradio"
+                aria-checked={this.props.active}
                 onClick={this.clickedButton}>
                 {this.props.label}
             </button>

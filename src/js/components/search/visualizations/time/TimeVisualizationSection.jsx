@@ -74,7 +74,8 @@ export default class TimeVisualizationSection extends React.Component {
                     </div>
                     <div className="visualization-period">
                         <div className="content">
-                            <ul>
+                            <ul
+                                role="menu">
                                 <li>
                                     <TimeVisualizationPeriodButton
                                         value="fiscal_year"

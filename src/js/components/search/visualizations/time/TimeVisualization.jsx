@@ -99,6 +99,7 @@ export default class TimeVisualization extends React.Component {
             // only mount the chart component if there is data to display
             chart = (<BarChart
                 {...this.props}
+                title="Spending Over Time (bar chart)"
                 showTooltip={this.showTooltip}
                 activeLabel={this.state.tooltipData} />);
         }

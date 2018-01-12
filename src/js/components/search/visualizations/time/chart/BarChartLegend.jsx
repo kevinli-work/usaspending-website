@@ -19,7 +19,9 @@ export default class BarChartLegend extends React.Component {
             key={item.label} />));
 
         return (
-            <g className="chart-legend">
+            <g
+                className="chart-legend"
+                aria-hidden="true">
                 {items}
             </g>
         );

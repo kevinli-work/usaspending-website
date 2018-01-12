@@ -37,6 +37,8 @@ export default class BarItem extends React.Component {
         this.mouseEntered = this.mouseEntered.bind(this);
         this.mouseExited = this.mouseExited.bind(this);
         this.touchedBar = this.touchedBar.bind(this);
+
+        this.keyboardSelectedItem = this.keyboardSelectedItem.bind(this);
     }
 
     componentWillUnmount() {
@@ -62,6 +64,12 @@ export default class BarItem extends React.Component {
         });
     }
 
+    keyboardSelectedItem(e) {
+        if (e.key === 'Enter' || e.key === '') {
+            this.props.selectBar(this.props.identifier, true);
+        }
+    }
+
     render() {
         // generate an invisible hitbox that spans the full height of the graph and matches the
         // width of the data point bar to trigger hover events anywhere along the Y axis for the
@@ -71,7 +79,12 @@ export default class BarItem extends React.Component {
             hoverClass = ' hover';
         }
         return (
-            <g aria-label={this.props.description}>
+            <g
+                tabIndex={-1}
+                role="button"
+                aria-label={this.props.description}
+                aria-pressed={this.state.active}
+                onKeyDown={this.keyboardSelectedItem}>
                 <desc>{this.props.description}</desc>
                 <rect
                     className={`bar-item${hoverClass}`}
@@ -86,7 +99,6 @@ export default class BarItem extends React.Component {
                     y={0}
                     width={this.props.width}
                     height={this.props.graphHeight}
-                    tabIndex={-1}
                     onFocus={this.mouseEntered}
                     onBlur={this.mouseExited}
                     onMouseEnter={this.mouseEntered}

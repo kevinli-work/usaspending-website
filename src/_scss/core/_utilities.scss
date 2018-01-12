@@ -11,7 +11,7 @@
     left: -999em;
 }
 
-.usa-sr-only {
+.usa-sr-only, .sr-only {
     @include sr-only();
 }
 
