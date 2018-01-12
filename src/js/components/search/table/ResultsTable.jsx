@@ -11,7 +11,7 @@ import { awardTableColumnTypes } from 'dataMapping/search/awardTableColumnTypes'
 import IBTable from 'components/sharedComponents/IBTable/IBTable';
 
 import ResultsTableHeaderCell from './cells/ResultsTableHeaderCell';
-import ResultsTableFormattedCell from './cells/ResultsTableFormattedCell';
+import ResultsTableFormattedCell, { ResultsTableFormattedCellRenderer } from './cells/ResultsTableFormattedCell';
 import ResultsTableAwardIdCell from './cells/ResultsTableAwardIdCell';
 
 const propTypes = {
@@ -78,10 +78,18 @@ export default class ResultsTable extends React.Component {
             props.id = this.props.results[rowIndex].internal_id;
         }
 
-        return React.createElement(
-            cellClass,
-            props
-        );
+        return ResultsTableFormattedCellRenderer(props);
+
+        // return React.createElement(
+        //     'div',
+        //     null,
+        //     'This is a test'
+        // );
+
+        // return React.createElement(
+        //     cellClass,
+        //     props
+        // );
     }
 
     prepareTable() {

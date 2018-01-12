@@ -15,6 +15,7 @@ const propTypes = {
     bodyHeight: PropTypes.number,
     bodyWidth: PropTypes.number,
     contentWidth: PropTypes.number,
+    tableId: PropTypes.string,
     onReachedBottom: PropTypes.func,
     bodyCellRender: PropTypes.func
 };
@@ -81,7 +82,14 @@ export default class TableBody extends React.PureComponent {
 
         if (visibleRange !== this.state.visibleRange) {
             // cells changed
-            this._visibleCells = visibleCoords.cells.map((coord) => this._cellCache[coord]);
+            this._visibleCells = visibleCoords.rows.reduce((visible, rowData) => {
+                const cells = rowData.cells.map((coord) => this._generateCell(coord.col, coord.row));
+                const row = this._generateRowWrapper(rowData.row, cells);
+                // const output = visible.concat(cells);
+                // return output;
+                visible.push(row);
+                return visible;
+            }, []);
 
             this.setState({
                 visibleRange
@@ -143,29 +151,43 @@ export default class TableBody extends React.PureComponent {
             visibleColumns.push(trailingColumn);
         }
 
-        const visibleCells = [];
+        const visibleRows = [];
 
         for (let i = topRow; i <= bottomRow; i++) {
+            const cellsInRow = [];
             if (i === topRow) {
                 // ensure the last column of the first row is included for accessibility purposes
                 if (visibleColumns[visibleColumns.length - 1] !== this.props.columns.length - 1) {
-                    visibleCells.push(`${this.props.columns.length - 1},${topRow}`);
+                    cellsInRow.push({
+                        col: this.props.columns.length - 1,
+                        row: topRow
+                    });
                 }
             }
             else if (i === bottomRow) {
                 // ensure the first column of the last row is included for accessibility purposes
                 if (visibleColumns[0] !== 0) {
-                    visibleCells.push(`0,${bottomRow}`);
+                    cellsInRow.push({
+                        col: 0,
+                        row: bottomRow
+                    });
                 }
             }
 
             visibleColumns.forEach((col) => {
-                visibleCells.push(`${col},${i}`);
+                cellsInRow.push({
+                    col,
+                    row: i
+                });
+            });
+            visibleRows.push({
+                row: i,
+                cells: cellsInRow
             });
         }
 
         return {
-            cells: visibleCells,
+            rows: visibleRows,
             range: `${visibleColumns[0]},${topRow}-${visibleColumns[visibleColumns.length - 1]},${bottomRow}`
         };
     }
@@ -186,34 +208,38 @@ export default class TableBody extends React.PureComponent {
         // pre-generate all the cells the table will have when the data is initially loaded in
         // we'll pull these from the cache on-the-fly as they come into view
         const cellCache = {};
-        for (let rowIndex = 0; rowIndex < this.props.rowCount; rowIndex++) {
-            this.props.columns.forEach((column, columnIndex) => {
-                const cellPositioning = {
-                    x: column.x,
-                    y: rowIndex * this.props.rowHeight,
-                    width: column.width,
-                    height: this.props.rowHeight
-                };
+        // for (let rowIndex = 0; rowIndex < this.props.rowCount; rowIndex++) {
+            // this.props.columns.forEach((column, columnIndex) => {
+            //     const cellPositioning = {
+            //         x: column.x,
+            //         y: rowIndex * this.props.rowHeight,
+            //         width: column.width,
+            //         height: this.props.rowHeight
+            //     };
 
-                const cellContent = this.props.bodyCellRender(columnIndex, rowIndex);
+            //     const cellContent = this.props.bodyCellRender(columnIndex, rowIndex);
+            //     // console.log(cellContent);
 
-                const coord = `${columnIndex},${rowIndex}`;
-                const realCell = (
-                    <div
-                        key={coord}
-                        className="ibt-table-cell"
-                        style={{
-                            top: cellPositioning.y,
-                            left: cellPositioning.x,
-                            height: cellPositioning.height,
-                            width: cellPositioning.width
-                        }}>
-                        {cellContent}
-                    </div>
-                );
-                cellCache[coord] = realCell;
-            });
-        }
+            //     const coord = `${columnIndex},${rowIndex}`;
+            //     const realCell = (
+            //         <div
+            //             key={coord}
+            //             className="ibt-table-cell"
+            //             tabIndex={-1}
+            //             role="gridcell"
+            //             aria-describedby={`header-${this.props.tableId}-${columnIndex}`}
+            //             style={{
+            //                 top: cellPositioning.y,
+            //                 left: cellPositioning.x,
+            //                 height: cellPositioning.height,
+            //                 width: cellPositioning.width
+            //             }}>
+            //             {cellContent}
+            //         </div>
+            //     );
+            //     cellCache[coord] = realCell;
+            // });
+        // }
 
         this._cellCache = cellCache;
 
@@ -221,6 +247,48 @@ export default class TableBody extends React.PureComponent {
             x: this._lastX,
             y: this._lastY
         });
+    }
+
+    _generateRowWrapper(rowIndex, cells) {
+        return (
+            <div
+                key={`row-${rowIndex}`}
+                className="ibt-table-row"
+                tabIndex={-1}
+                role="row">
+                {cells}
+            </div>
+        );
+    }
+
+    _generateCell(columnIndex, rowIndex) {
+        const cellContent = this.props.bodyCellRender(columnIndex, rowIndex);
+        const column = this.props.columns[columnIndex];
+        const cellPositioning = {
+            x: column.x,
+            y: rowIndex * this.props.rowHeight,
+            width: column.width,
+            height: this.props.rowHeight
+        };
+        const coord = `${columnIndex},${rowIndex}`;
+        const realCell = (
+            <div
+                key={coord}
+                className="ibt-table-cell"
+                tabIndex={-1}
+                role="gridcell"
+                aria-describedby={`header-${this.props.tableId}-${columnIndex}`}
+                style={{
+                    top: cellPositioning.y,
+                    left: cellPositioning.x,
+                    height: cellPositioning.height,
+                    width: cellPositioning.width
+                }}>
+                {cellContent}
+            </div>
+        );
+
+        return realCell;
     }
 
     render() {
@@ -232,8 +300,11 @@ export default class TableBody extends React.PureComponent {
         return (
             <div
                 className="ibt-table-body-container"
+                role="presentation"
                 style={style}>
-                <div className="ibt-table-body">
+                <div
+                    className="ibt-table-body"
+                    role="rowgroup">
                     {this._visibleCells}
                 </div>
             </div>

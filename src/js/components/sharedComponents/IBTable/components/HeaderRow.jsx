@@ -12,6 +12,7 @@ import RenderQueue from '../managers/RenderQueue';
 const propTypes = {
     contentWidth: PropTypes.number,
     headerHeight: PropTypes.number,
+    tableId: PropTypes.string,
     columns: PropTypes.array,
     headerCellRender: PropTypes.func
 };
@@ -78,7 +79,9 @@ export default class HeaderRow extends React.Component {
             return (
                 <div
                     key={index}
+                    role="columnheader"
                     className="ibt-header-cell"
+                    id={`header-${this.props.tableId}-${index}`}
                     style={cellStyle}>
                     {headerCell}
                 </div>
@@ -88,6 +91,7 @@ export default class HeaderRow extends React.Component {
         return (
             <div
                 className="ibt-header"
+                role="row"
                 style={style}
                 ref={(div) => {
                     this._headerDiv = div;

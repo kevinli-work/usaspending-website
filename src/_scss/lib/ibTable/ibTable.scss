@@ -47,6 +47,11 @@
             position: relative;
             display: table;
 
+            .ibt-table-row {
+                position: relative;
+                display: table-row;
+            }
+
             .ibt-table-cell {
                 display: table-cell;
                 position: absolute;

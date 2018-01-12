@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { uniqueId, debounce } from 'lodash';
 
 import HeaderRow from './HeaderRow';
 import TableBody from './TableBody';
@@ -36,7 +37,8 @@ export default class Table extends React.Component {
         super(props);
 
         this.state = {
-            scrollbarHeight: 0
+            scrollbarHeight: 0,
+            tableId: String(uniqueId())
         };
 
         this._restorePointerTimer = null;
@@ -47,8 +49,12 @@ export default class Table extends React.Component {
         this._tableWrapper = null;
         this._internalDiv = null;
 
-        this._scrolledTable = this._scrolledTable.bind(this);
+        this._scrolledTable = debounce(this._scrolledTable.bind(this));
         this._scrolledHeader = this._scrolledHeader.bind(this);
+    }
+
+    componentDidMount() {
+        this._tableWrapper.addEventListener('scroll', this._scrolledTable, { passive: true });
     }
 
     reloadTable() {
@@ -200,11 +206,13 @@ export default class Table extends React.Component {
         return (
             <div
                 className="ibt-table-container"
-                style={style}>
+                style={style}
+                role="grid">
                 <div
                     className="ibt-table-header-container"
                     style={headerStyle}
                     onScroll={this._scrolledHeader}
+                    role="presentation"
                     ref={(div) => {
                         this._headerWrapper = div;
                     }}>
@@ -213,6 +221,7 @@ export default class Table extends React.Component {
                         headerHeight={this.props.headerHeight}
                         columns={this.props.columns}
                         headerCellRender={this.props.headerCellRender}
+                        tableId={this.state.tableId}
                         ref={(component) => {
                             this._headerComponent = component;
                         }} />
@@ -220,12 +229,13 @@ export default class Table extends React.Component {
                 <div
                     className="ibt-table-body-section"
                     style={bodyStyle}
-                    onScroll={this._scrolledTable}
+                    role="presentation"
                     ref={(div) => {
                         this._tableWrapper = div;
                     }}>
                     <div
                         className="ibt-table-content"
+                        role="presentation"
                         style={contentStyle}
                         ref={(div) => {
                             this._internalDiv = div;
@@ -239,6 +249,7 @@ export default class Table extends React.Component {
                             rowCount={this.props.rowCount}
                             bodyCellRender={this.props.bodyCellRender}
                             onReachedBottom={this.props.onReachedBottom}
+                            tableId={this.state.tableId}
                             ref={(component) => {
                                 this._bodyComponent = component;
                             }} />

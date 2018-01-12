@@ -16,7 +16,7 @@ const propTypes = {
     dataType: PropTypes.string
 };
 
-export default class ResultsTableFormattedCell extends React.Component {
+export default class ResultsTableFormattedCell extends React.PureComponent {
     formatContent(original, type) {
         if (type === 'date') {
             // format the content as a date
@@ -50,6 +50,8 @@ export default class ResultsTableFormattedCell extends React.Component {
             rowClass += ' last-column';
         }
 
+        console.log(this.props.columnIndex, this.props.rowIndex);
+
         return (
             <div className={`award-result-generic-cell ${rowClass}`}>
                 <div className="cell-content">
@@ -59,5 +61,49 @@ export default class ResultsTableFormattedCell extends React.Component {
         );
     }
 }
+
+function formatContent(original, type) {
+    if (type === 'date') {
+        // format the content as a date
+        return moment(original, 'YYYY-MM-DD').format('M/D/YYYY');
+    }
+    else if (type === 'currency') {
+        return formatMoney(original);
+    }
+    return original;
+}
+
+export const ResultsTableFormattedCellRenderer = (props) => {
+    // cell needs to have some content or it will collapse
+    // replace with a &nbsp; if there's no data
+    let content = props.value;
+    if (!content) {
+        content = "\u00A0";
+    }
+    else {
+        content = formatContent(content, props.dataType);
+    }
+
+    // calculate even-odd class names
+    let rowClass = 'row-even';
+    if (props.rowIndex % 2 === 0) {
+        // row index is zero-based
+        rowClass = 'row-odd';
+    }
+
+    if (props.isLastColumn) {
+        rowClass += ' last-column';
+    }
+
+    // console.log(props.columnIndex, props.rowIndex);
+
+    return (
+        <div className={`award-result-generic-cell ${rowClass}`}>
+            <div className="cell-content">
+                {content}
+            </div>
+        </div>
+    );
+};
 
 ResultsTableFormattedCell.propTypes = propTypes;
