@@ -4,6 +4,8 @@
  */
 
 import React from 'react';
+import { InfoCircle } from 'components/sharedComponents/icons/Icons';
+
 
 import { defaultFiscalYear } from 'helpers/fiscalYearHelper';
 
@@ -43,6 +45,35 @@ const ExplorerLanding = () => (
                     description="See spending grouped by the types of items and services purchased by the federal government."
                     url="#/explorer/object_class"
                     term="object-class" />
+            </div>
+            <div className="explorer-disclaimer-wrap">
+                <div className="explorer-disclaimer">
+                    <div className="explorer-disclaimer__icon">
+                        <i className="usa-da-icon">
+                            <InfoCircle alt="Information" />
+                        </i>
+                    </div>
+                    <div className="explorer-disclaimer__content">
+                        <div className="explorer-disclaimer__title">
+                            About the Spending Explorer
+                        </div>
+                        <ul className="explorer-disclaimer__list">
+                            <li>
+                                All dollar amounts shown here represent obligated amounts.
+                            </li>
+                            <li>
+                                Department of Defense data isn’t available for the last reported fiscal quarter. Learn more
+                                about DoD reporting exemptions in our&nbsp;
+                                <a
+                                    href=""
+                                    target="_blank"
+                                    rel="noopener noreferrer">
+                                    FAQ
+                                </a>.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </ExplorerWrapperPage>

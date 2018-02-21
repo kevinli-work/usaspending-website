@@ -62,6 +62,21 @@
 
         @import "./_option";
 
-        padding-bottom: rem(230);
+        padding-bottom: rem(65);
+    }
+
+    .explorer-disclaimer-wrap {
+        padding: 0 rem(30) rem(230) rem(30);
+        @include media($large-screen) {
+            width: rem(1110);
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 0;
+            padding-right: 0;
+        }
+        @include media($x-large-screen) {
+            width: rem(1260);
+        }
+        @import "./_disclaimer";
     }
 }

@@ -1,0 +1,24 @@
+.explorer-disclaimer {
+  padding: rem(15);
+  background-color: $color-primary-alt-lightest;
+  border: solid rem(1) $color-primary-alt-light;
+  @include display(flex);
+  @include align-items(flex-start);
+  .explorer-disclaimer__icon {
+    @include flex(0 0 auto);
+    svg {
+      height: rem(30);
+      width: rem(30);
+      fill: $color-primary-alt-dark;
+    }
+  }
+  .explorer-disclaimer__content {
+    @include flex(1 1 auto);
+    .explorer-disclaimer__title {
+      padding-left: rem(15);
+      font-size: rem(24);
+      font-weight: 600;
+      line-height: rem(31);
+    }
+  }
+}
