@@ -32,7 +32,8 @@ const propTypes = {
     data: PropTypes.object,
     loading: PropTypes.bool,
     hasFilteredObligated: PropTypes.bool,
-    tooltipLabels: PropTypes.object
+    tooltipLabels: PropTypes.object,
+    legendOffsets: PropTypes.object
 };
 /* eslint-enable react/no-unused-prop-types */
 
@@ -78,28 +79,29 @@ export default class TimeVisualization extends React.Component {
         let chart = (<ChartMessage message="No data to display" />);
         let legend = [];
         const tooltipLabels = this.props.tooltipLabels;
+        const legendOffsets = this.props.legendOffsets;
 
         if (this.props.hasFilteredObligated) {
             legend = [
                 {
                     color: '#fba302',
                     label: tooltipLabels.outlay,
-                    offset: 0
+                    offset: legendOffsets.filteredObligated.outlay
                 },
                 {
                     color: '#2c4452',
                     label: tooltipLabels.obligationsFiltered,
-                    offset: 84
+                    offset: legendOffsets.filteredObligated.obligationsFiltered
                 },
                 {
                     color: '#5c7480',
                     label: tooltipLabels.obligationsOther,
-                    offset: 262
+                    offset: legendOffsets.filteredObligated.obligationsOther
                 },
                 {
                     color: '#a0bac4',
                     label: tooltipLabels.unobligated,
-                    offset: 450
+                    offset: legendOffsets.filteredObligated.unobligated
                 }
             ];
         }
@@ -108,17 +110,17 @@ export default class TimeVisualization extends React.Component {
                 {
                     color: '#fba302',
                     label: tooltipLabels.outlay,
-                    offset: 0
+                    offset: legendOffsets.nonFilteredObligated.outlay
                 },
                 {
                     color: '#5c7480',
                     label: tooltipLabels.obligations,
-                    offset: 84
+                    offset: legendOffsets.nonFilteredObligated.obligations
                 },
                 {
                     color: '#a0bac4',
                     label: tooltipLabels.unobligated,
-                    offset: 220
+                    offset: legendOffsets.nonFilteredObligated.unobligated
                 }
             ];
         }

@@ -54,6 +54,35 @@ const tooltipLabels = {
     }
 };
 
+const legendOffsets = {
+    year: {
+        filteredObligated: {
+            outlay: 0,
+            obligationsFiltered: 84,
+            obligationsOther: 262,
+            unobligated: 450
+        },
+        nonFilteredObligated: {
+            outlay: 0,
+            obligations: 84,
+            unobligated: 220
+        }
+    },
+    quarter: {
+        filteredObligated: {
+            outlay: 0,
+            obligationsFiltered: 140,
+            obligationsOther: 392,
+            unobligated: 634
+        },
+        nonFilteredObligated: {
+            outlay: 0,
+            obligations: 140,
+            unobligated: 345
+        }
+    }
+};
+
 export class AccountTimeVisualizationSectionContainer extends React.PureComponent {
     constructor(props) {
         super(props);
@@ -287,6 +316,8 @@ export class AccountTimeVisualizationSectionContainer extends React.PureComponen
 
         quartersYears.forEach((quarterYear) => {
             xSeries.push(`${quarterYear}`);
+            const descriptions = tooltipLabels[this.state.visualizationPeriod];
+
             if (this.state.hasFilteredObligated) {
                 const budgetAuthority = yData[quarterYear].budgetAuthority;
                 const unobligated = yData[quarterYear].unobligated;
@@ -300,25 +331,25 @@ export class AccountTimeVisualizationSectionContainer extends React.PureComponen
                         bottom: 0,
                         top: obligatedFiltered,
                         value: obligatedFiltered,
-                        description: tooltipLabels[this.state.visualizationPeriod].obligationsFiltered
+                        description: descriptions.obligationsFiltered
                     },
                     obligatedOther: {
                         bottom: obligatedFiltered,
                         top: obligatedFiltered + obligatedOther,
                         value: obligatedOther,
-                        description: tooltipLabels[this.state.visualizationPeriod].obligationsOther
+                        description: descriptions.obligationsOther
                     },
                     unobligated: {
                         bottom: budgetAuthority - unobligated,
                         top: budgetAuthority,
                         value: unobligated,
-                        description: tooltipLabels[this.state.visualizationPeriod].unobligated
+                        description: descriptions.unobligated
                     },
                     outlay: {
                         bottom: outlay,
                         top: outlay,
                         value: outlay,
-                        description: tooltipLabels[this.state.visualizationPeriod].outlay
+                        description: descriptions.outlay
                     }
                 };
                 ySeries.push(period);
@@ -330,19 +361,19 @@ export class AccountTimeVisualizationSectionContainer extends React.PureComponen
                         bottom: 0,
                         top: yData[quarterYear].obligated,
                         value: yData[quarterYear].obligated,
-                        description: tooltipLabels[this.state.visualizationPeriod].obligations
+                        description: descriptions.obligations
                     },
                     unobligated: {
                         bottom: yData[quarterYear].obligated,
                         top: yData[quarterYear].unobligated + yData[quarterYear].obligated,
                         value: yData[quarterYear].unobligated,
-                        description: tooltipLabels[this.state.visualizationPeriod].unobligated
+                        description: descriptions.unobligated
                     },
                     outlay: {
                         bottom: yData[quarterYear].outlay,
                         top: yData[quarterYear].outlay,
                         value: yData[quarterYear].outlay,
-                        description: tooltipLabels[this.state.visualizationPeriod].outlay
+                        description: descriptions.outlay
                     }
                 };
 
@@ -419,7 +450,8 @@ export class AccountTimeVisualizationSectionContainer extends React.PureComponen
                 visualizationPeriod={this.state.visualizationPeriod}
                 changePeriod={this.changePeriod}
                 hasFilteredObligated={this.state.hasFilteredObligated}
-                tooltipLabels={tooltipLabels[this.state.visualizationPeriod]} />
+                tooltipLabels={tooltipLabels[this.state.visualizationPeriod]}
+                legendOffsets={legendOffsets[this.state.visualizationPeriod]} />
         );
     }
 }

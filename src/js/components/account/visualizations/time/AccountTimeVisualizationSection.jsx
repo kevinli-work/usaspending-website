@@ -17,7 +17,8 @@ const propTypes = {
     visualizationPeriod: PropTypes.string,
     changePeriod: PropTypes.func,
     hasFilteredObligated: PropTypes.bool,
-    tooltipLabels: PropTypes.object
+    tooltipLabels: PropTypes.object,
+    legendOffsets: PropTypes.object
 };
 
 export default class AccountTimeVisualizationSection extends React.Component {
@@ -99,7 +100,8 @@ export default class AccountTimeVisualizationSection extends React.Component {
                     data={this.props.data}
                     width={this.state.visualizationWidth}
                     hasFilteredObligated={this.props.hasFilteredObligated}
-                    tooltipLabels={this.props.tooltipLabels} />
+                    tooltipLabels={this.props.tooltipLabels}
+                    legendOffsets={this.props.legendOffsets} />
             </div>
         );
     }
