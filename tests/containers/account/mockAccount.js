@@ -656,19 +656,19 @@ export const parsedQuarterYSeries = [
             bottom: 0,
             top: 2696684.86,
             value: 2696684.86,
-            description: 'Obligations Incurred'
+            description: 'Change in Obligations Incurred'
         },
         unobligated: {
             bottom: 2696684.86,
             top: 198707976.61 + 2696684.86,
             value: 198707976.61,
-            description: 'Unobligated Balance'
+            description: 'Change in Unobligated Balance'
         },
         outlay: {
             bottom: -5505246.42,
             top: -5505246.42,
             value: -5505246.42,
-            description: 'Outlay'
+            description: 'Change in Outlays'
         }
     },
     {
@@ -676,19 +676,19 @@ export const parsedQuarterYSeries = [
             bottom: 0,
             top: 3851752.00,
             value: 3851752.00,
-            description: 'Obligations Incurred'
+            description: 'Change in Obligations Incurred'
         },
         unobligated: {
             bottom: 3851752.00,
             top: 5851779752.00 + 3851752.00,
             value: 5851779752.00,
-            description: 'Unobligated Balance'
+            description: 'Change in Unobligated Balance'
         },
         outlay: {
             bottom: -4413237.11,
             top: -4413237.11,
             value: -4413237.11,
-            description: 'Outlay'
+            description: 'Change in Outlays'
         }
     }
 ];
@@ -699,25 +699,25 @@ export const parsedQuarterYSeriesFiltered = [
             bottom: 0,
             top: 2696684.86,
             value: 2696684.86,
-            description: 'Obligations Incurred (Filtered)'
+            description: 'Change in Obligations Incurred (Filtered)'
         },
         obligatedOther: {
             bottom: 2696684.86,
             top: (201404661.47 - 198707976.61 - 2696684.86) + 2696684.86,
             value: (201404661.47 - 198707976.61 - 2696684.86),
-            description: 'Obligations Incurred (Other)'
+            description: 'Change in Obligations Incurred (Other)'
         },
         unobligated: {
             bottom: (201404661.47 - 198707976.61),
             top: 201404661.47,
             value: 198707976.61,
-            description: 'Unobligated Balance'
+            description: 'Change in Unobligated Balance'
         },
         outlay: {
             bottom: -5505246.42,
             top: -5505246.42,
             value: -5505246.42,
-            description: 'Outlay'
+            description: 'Change in Outlays'
         }
     },
     {
@@ -725,25 +725,25 @@ export const parsedQuarterYSeriesFiltered = [
             bottom: 0,
             top: 3851752.00,
             value: 3851752.00,
-            description: 'Obligations Incurred (Filtered)'
+            description: 'Change in Obligations Incurred (Filtered)'
         },
         obligatedOther: {
             bottom: 3851752.00,
             top: (101905442.35 - 5851779752.00 - 3851752) + 3851752,
             value: (101905442.35 - 5851779752.00 - 3851752),
-            description: 'Obligations Incurred (Other)'
+            description: 'Change in Obligations Incurred (Other)'
         },
         unobligated: {
             bottom: (101905442.35 - 5851779752.00),
             top: 101905442.35,
             value: 5851779752.00,
-            description: 'Unobligated Balance'
+            description: 'Change in Unobligated Balance'
         },
         outlay: {
             bottom: -4413237.11,
             top: -4413237.11,
             value: -4413237.11,
-            description: 'Outlay'
+            description: 'Change in Outlays'
         }
     }
 ];
