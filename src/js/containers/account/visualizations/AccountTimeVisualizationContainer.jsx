@@ -37,6 +37,23 @@ export const VisData = Record({
     stacks: []
 });
 
+const tooltipLabels = {
+    year: {
+        obligationsFiltered: 'Obligations Incurred (Filtered)',
+        obligationsOther: 'Obligations Incurred (Other)',
+        unobligated: 'Unobligated Balance',
+        outlay: 'Outlay',
+        obligations: 'Obligations Incurred'
+    },
+    quarter: {
+        obligationsFiltered: 'Change in Obligations Incurred (Filtered)',
+        obligationsOther: 'Change in Obligations Incurred (Other)',
+        unobligated: 'Change in Unobligated Balance',
+        outlay: 'Change in Outlays',
+        obligations: 'Change in Obligations Incurred'
+    }
+};
+
 export class AccountTimeVisualizationSectionContainer extends React.PureComponent {
     constructor(props) {
         super(props);
@@ -283,25 +300,25 @@ export class AccountTimeVisualizationSectionContainer extends React.PureComponen
                         bottom: 0,
                         top: obligatedFiltered,
                         value: obligatedFiltered,
-                        description: 'Obligations Incurred (Filtered)'
+                        description: tooltipLabels[this.state.visualizationPeriod].obligationsFiltered
                     },
                     obligatedOther: {
                         bottom: obligatedFiltered,
                         top: obligatedFiltered + obligatedOther,
                         value: obligatedOther,
-                        description: 'Obligations Incurred (Other)'
+                        description: tooltipLabels[this.state.visualizationPeriod].obligationsOther
                     },
                     unobligated: {
                         bottom: budgetAuthority - unobligated,
                         top: budgetAuthority,
                         value: unobligated,
-                        description: 'Unobligated Balance'
+                        description: tooltipLabels[this.state.visualizationPeriod].unobligated
                     },
                     outlay: {
                         bottom: outlay,
                         top: outlay,
                         value: outlay,
-                        description: 'Outlay'
+                        description: tooltipLabels[this.state.visualizationPeriod].outlay
                     }
                 };
                 ySeries.push(period);
@@ -313,19 +330,19 @@ export class AccountTimeVisualizationSectionContainer extends React.PureComponen
                         bottom: 0,
                         top: yData[quarterYear].obligated,
                         value: yData[quarterYear].obligated,
-                        description: 'Obligations Incurred'
+                        description: tooltipLabels[this.state.visualizationPeriod].obligations
                     },
                     unobligated: {
                         bottom: yData[quarterYear].obligated,
                         top: yData[quarterYear].unobligated + yData[quarterYear].obligated,
                         value: yData[quarterYear].unobligated,
-                        description: 'Unobligated Balance'
+                        description: tooltipLabels[this.state.visualizationPeriod].unobligated
                     },
                     outlay: {
                         bottom: yData[quarterYear].outlay,
                         top: yData[quarterYear].outlay,
                         value: yData[quarterYear].outlay,
-                        description: 'Outlay'
+                        description: tooltipLabels[this.state.visualizationPeriod].outlay
                     }
                 };
 
@@ -401,7 +418,8 @@ export class AccountTimeVisualizationSectionContainer extends React.PureComponen
                 loading={this.state.loading}
                 visualizationPeriod={this.state.visualizationPeriod}
                 changePeriod={this.changePeriod}
-                hasFilteredObligated={this.state.hasFilteredObligated} />
+                hasFilteredObligated={this.state.hasFilteredObligated}
+                tooltipLabels={tooltipLabels[this.state.visualizationPeriod]} />
         );
     }
 }

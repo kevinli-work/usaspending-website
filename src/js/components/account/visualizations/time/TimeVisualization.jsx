@@ -31,7 +31,8 @@ const propTypes = {
     height: PropTypes.number,
     data: PropTypes.object,
     loading: PropTypes.bool,
-    hasFilteredObligated: PropTypes.bool
+    hasFilteredObligated: PropTypes.bool,
+    tooltipLabels: PropTypes.object
 };
 /* eslint-enable react/no-unused-prop-types */
 
@@ -76,27 +77,28 @@ export default class TimeVisualization extends React.Component {
     render() {
         let chart = (<ChartMessage message="No data to display" />);
         let legend = [];
+        const tooltipLabels = this.props.tooltipLabels;
 
         if (this.props.hasFilteredObligated) {
             legend = [
                 {
                     color: '#fba302',
-                    label: 'Outlay',
+                    label: tooltipLabels.outlay,
                     offset: 0
                 },
                 {
                     color: '#2c4452',
-                    label: 'Obligations Incurred (Filtered)',
+                    label: tooltipLabels.obligationsFiltered,
                     offset: 84
                 },
                 {
                     color: '#5c7480',
-                    label: 'Obligations Incurred (Other)',
+                    label: tooltipLabels.obligationsOther,
                     offset: 262
                 },
                 {
                     color: '#a0bac4',
-                    label: 'Unobligated Balance',
+                    label: tooltipLabels.unobligated,
                     offset: 450
                 }
             ];
@@ -105,17 +107,17 @@ export default class TimeVisualization extends React.Component {
             legend = [
                 {
                     color: '#fba302',
-                    label: 'Outlay',
+                    label: tooltipLabels.outlay,
                     offset: 0
                 },
                 {
                     color: '#5c7480',
-                    label: 'Obligations Incurred',
+                    label: tooltipLabels.obligations,
                     offset: 84
                 },
                 {
                     color: '#a0bac4',
-                    label: 'Unobligated Balance',
+                    label: tooltipLabels.unobligated,
                     offset: 220
                 }
             ];

@@ -16,7 +16,8 @@ const propTypes = {
     loading: PropTypes.bool,
     visualizationPeriod: PropTypes.string,
     changePeriod: PropTypes.func,
-    hasFilteredObligated: PropTypes.bool
+    hasFilteredObligated: PropTypes.bool,
+    tooltipLabels: PropTypes.object
 };
 
 export default class AccountTimeVisualizationSection extends React.Component {
@@ -97,7 +98,8 @@ export default class AccountTimeVisualizationSection extends React.Component {
                     loading={this.props.loading}
                     data={this.props.data}
                     width={this.state.visualizationWidth}
-                    hasFilteredObligated={this.props.hasFilteredObligated} />
+                    hasFilteredObligated={this.props.hasFilteredObligated}
+                    tooltipLabels={this.props.tooltipLabels} />
             </div>
         );
     }
