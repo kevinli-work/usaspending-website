@@ -193,7 +193,7 @@ export default class ExplorerTreemap extends React.Component {
             return null;
         }
 
-        const cells = this.state.virtualChart.map((cell) => (
+        const vcells = this.state.virtualChart.map((cell) => (
             <TreemapCell
                 {...cell}
                 key={`${cell.data.name}-${cell.data.id}`}
@@ -201,6 +201,7 @@ export default class ExplorerTreemap extends React.Component {
                 showTooltip={this.props.showTooltip}
                 hideTooltip={this.props.hideTooltip} />
         ));
+        const cells = [];
 
         return (
             <div className="explorer-treemap">
