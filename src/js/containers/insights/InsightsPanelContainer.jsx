@@ -10,6 +10,8 @@ import { connect } from 'react-redux';
 
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 
+import Router from 'containers/router/Router';
+
 import * as insightsActions from 'redux/actions/insights/insightsActions';
 
 import InsightsPanel from 'components/insights/panel/InsightsPanel';
@@ -22,7 +24,11 @@ export class InsightsPanelContainer extends React.Component {
     render() {
         let panel = null;
         if (this.props.insights.display) {
-            panel = <InsightsPanel {...this.props} />;
+            panel = (
+                <InsightsPanel
+                    {...this.props}
+                    feature={Router.state.insightsFeature || ''} />
+            );
         }
 
         return (

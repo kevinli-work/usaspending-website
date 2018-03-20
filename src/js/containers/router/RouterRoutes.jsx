@@ -77,6 +77,7 @@ const routes = {
         {
             path: '/agency/:agencyId',
             parent: '/agency',
+            insightsFeature: 'agency',
             component: (cb) => {
                 require.ensure([], (require) => {
                     cb(require('containers/agency/AgencyContainer').default);

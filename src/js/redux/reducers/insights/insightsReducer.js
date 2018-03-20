@@ -4,7 +4,7 @@
  */
 
 export const initialState = {
-    display: true
+    display: false
 };
 
 const insightsReducer = (state = initialState, action) => {

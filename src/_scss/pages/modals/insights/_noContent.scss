@@ -1,0 +1,27 @@
+.insights-none {
+    width: 100%;
+    height: calc(100vh - 76px);
+
+    @include display(flex);
+    @include justify-content(center);
+    @include align-items(center);
+    @include flex-direction(column);
+
+    h3.insights-none__title {
+        @include flex(0 0 auto);
+        margin: 0;
+        line-height: 1.2;
+        font-family: 'Barlow Semi Condensed', sans-serif;
+        font-style: italic;
+        font-weight: $font-bold;
+        font-size: rem(36);
+        text-transform: uppercase;
+        text-align: center
+    }
+
+    .insights-none__explanation {
+        @include flex(0 0 auto);
+        margin-top: rem(10);
+    }
+
+}

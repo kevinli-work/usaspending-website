@@ -248,6 +248,7 @@ export default class MajorObjectClasses extends React.Component {
                 { this.createTooltip() }
                 <div
                     className="tree-wrapper"
+                    data-insights-id="agency__major-object-class"
                     ref={(sr) => {
                         this.sectionWrapper = sr;
                     }}>

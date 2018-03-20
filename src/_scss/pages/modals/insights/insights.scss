@@ -12,8 +12,34 @@
 
     z-index: $z-guide + 200;
 
-    background-color: $color-gray-lighter;
+    background-color: $color-gray-lightest;
     box-shadow: -3px 0px 4px rgba(0, 0, 0, 0.2);
 
     @import "./_header";
+    @import "./_content";
+}
+
+[data-insights-active="true"] {
+    border: rem(4) solid #009378;
+    position: relative;
+
+    &::before {
+        content: 'Insights';
+        text-transform: uppercase;
+        color: $color-white;
+        font-family: 'Barlow Semi Condensed', sans-serif;
+        font-style: italic;
+        font-weight: $font-bold;
+        font-size: rem(12);
+
+        background-color:#009378;
+
+        position: absolute;
+        top: rem(-22);
+        left: rem(-4);
+        padding: rem(3) rem(5);
+
+        border-top-left-radius: rem(8);
+        border-top-right-radius: rem(8);
+    }
 }

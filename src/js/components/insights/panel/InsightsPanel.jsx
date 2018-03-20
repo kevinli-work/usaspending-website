@@ -8,12 +8,23 @@ import PropTypes from 'prop-types';
 
 import { Close } from 'components/sharedComponents/icons/Icons';
 
+import NoContent from './content/NoContent';
+import SwitchedContent from './content/SwitchedContent';
+
 const propTypes = {
-    hideInsights: PropTypes.func
+    hideInsights: PropTypes.func,
+    feature: PropTypes.string
 };
 
 export default class InsightsPanel extends React.Component {
     render() {
+        let content = (
+            <SwitchedContent {...this.props} />
+        );
+        if (!this.props.feature) {
+            content = <NoContent />;
+        }
+
         return (
             <div className="insights">
                 <div className="insights__header">
@@ -32,6 +43,9 @@ export default class InsightsPanel extends React.Component {
                         onClick={this.props.hideInsights}>
                         <Close alt="Close" />
                     </button>
+                </div>
+                <div className="insights__content">
+                    {content}
                 </div>
             </div>
         );

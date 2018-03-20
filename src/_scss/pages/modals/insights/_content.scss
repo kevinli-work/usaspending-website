@@ -1,0 +1,53 @@
+.insights__content {
+    padding: rem(10) rem(5);
+    min-height: calc(100vh - 66px);
+    max-height: calc(100vh - 66px);
+    overflow-y: auto;
+
+    @import "./_noContent";
+
+    .insights-section {
+        .insights-section__section-title {
+            font-weight: $font-semibold;
+            margin-bottom: rem(15);
+        }
+    }
+
+    .insights-card {
+        background-color: $color-white;
+        padding: rem(10);
+        margin-top: rem(5);
+        box-shadow: $box-shadow;
+
+        font-size: rem(14);
+
+        h3 {
+            margin: 0;
+            line-height: 1.2;
+            font-size: rem(16);
+            font-weight: $font-semibold;
+            text-transform: uppercase;
+        }
+
+        code {
+            word-break: break-word;
+            color: #F440B7;
+        }
+
+
+        ol ul {
+            @include unstyled-list;
+            margin: rem(10) 0;
+            margin-left: rem(-10);
+            padding: rem(10);
+            background-color: #FFFEEB;
+            border-left: rem(4) solid #F5A623;
+
+            font-style: italic;
+
+            code {
+                font-style: normal;                
+            }
+        }
+    }
+}

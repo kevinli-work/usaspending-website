@@ -14,7 +14,8 @@ import InsightsButton from 'components/insights/InsightsButton';
 export class InsightsButtonContainer extends React.Component {
     render() {
         return (
-            <InsightsButton {...this.props} />
+            <InsightsButton
+                {...this.props} />
         );
     }
 }

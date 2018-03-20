@@ -111,7 +111,9 @@ export default class FederalAccountVisualization extends React.Component {
                         This {formattedObligation} in obligations is broken out in multiple <strong>federal accounts</strong> that are helpful in understanding what the agency broadly spends its money on. You can drill-down further into a federal account to view its program activities, which are at a more granular level.
                     </p>
                 </div>
-                <div className="agency-section-content">
+                <div
+                    className="agency-section-content"
+                    data-insights-id="agency__federal-accounts">
                     <div className="chart-wrapper">
                         {chart}
                     </div>

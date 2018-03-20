@@ -61,6 +61,7 @@ export class RouterSingleton {
 
                 this.state = Object.assign({}, pathData, {
                     silentlyUpdate,
+                    insightsFeature: route.insightsFeature || null,
                     parent: route.parent
                 });
                 break;
