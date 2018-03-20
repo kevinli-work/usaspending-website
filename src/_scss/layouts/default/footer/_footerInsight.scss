@@ -1,0 +1,58 @@
+.footer-insight {
+
+    @include media($footer-horizontal) {
+        @include display(flex);
+        @include justify-content(flex-end);
+        @include align-items(center);
+
+        margin-top: rem(30);
+    }
+
+    .insight-toggle {
+        @include flex(0 0 auto);
+        @include button-unstyled;
+
+        @include display(flex);
+        @include justify-content(flex-end);
+        @include align-items(center);
+
+        .insight-toggle__title {
+            @include flex(1 1 auto);
+            color: $color-white;
+            font-family: 'Barlow Semi Condensed', sans-serif;
+            font-style: italic;
+            font-weight: $font-bold;
+            font-size: rem(18);
+            text-transform: uppercase;
+            margin-right: rem(10);
+        }
+
+        .insight-toggle__toggle {
+            @include flex(0 0 rem(50));
+            background-color: $color-gray-light;
+            height: rem(24);
+            border-radius: rem(12);
+            position: relative;
+
+            &.insight-toggle__toggle_on {
+                background-color: #009379;
+            }
+        }
+
+        .insight-toggle__decorator {
+            position: absolute;
+            top: rem(3);
+            left: rem(4);
+            width: rem(18);
+            height: rem(18);
+            border-radius: rem(9);
+            background-color: $color-white;
+
+            @include transition(transform 195ms);
+
+            &.insight-toggle__decorator_on {
+                transform: translate(rem(24), 0);
+            }
+        }
+    }
+}

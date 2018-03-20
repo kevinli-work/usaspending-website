@@ -1,6 +1,4 @@
 .footer-links {
-    @include flex(0 1 auto);
-
     @include media($footer-horizontal) {
         @include display(flex);
         @include flex-direction(row);

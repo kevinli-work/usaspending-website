@@ -78,3 +78,21 @@
     $asset-pipeline: false,
     $file-formats: eot woff2 woff ttf
 );
+
+@include font-face(
+    'Barlow Semi Condensed',
+    '#{$font-path}/BarlowSemiCondensed-SemiBoldItalic',
+    600,
+    italic,
+    $asset-pipeline: false,
+    $file-formats: ttf
+);
+
+@include font-face(
+    'Barlow Semi Condensed',
+    '#{$font-path}/BarlowSemiCondensed-BoldItalic',
+    700,
+    italic,
+    $asset-pipeline: false,
+    $file-formats: ttf
+);

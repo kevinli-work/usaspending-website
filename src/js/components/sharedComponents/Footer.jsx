@@ -11,6 +11,7 @@ import DownloadBottomBarContainer from
     'containers/search/modals/fullDownload/DownloadBottomBarContainer';
 import BulkDownloadBottomBarContainer from
     'containers/bulkDownload/modal/BulkDownloadBottomBarContainer';
+import InsightsButtonContainer from 'containers/insights/InsightsButtonContainer';
 import FloatingGlossaryButton from './FloatingGlossaryButton';
 import FooterExternalLink from './FooterExternalLink';
 
@@ -48,81 +49,86 @@ export default class Footer extends React.Component {
                                 <img src="img/footer_logo.png" alt="USAspending.gov" />
                             </a>
                         </div>
-                        <div className="footer-links">
-                            <div className="link-group">
-                                <div className="group-title">
-                                    About
+                        <div className="footer-content">
+                            <div className="footer-links">
+                                <div className="link-group">
+                                    <div className="group-title">
+                                        About
+                                    </div>
+                                    <ul className="links">
+                                        <li>
+                                            <a
+                                                href="#/about"
+                                                onClick={clickedFooterLink.bind(null, '/about')}>
+                                                About USAspending
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </div>
-                                <ul className="links">
-                                    <li>
-                                        <a
-                                            href="#/about"
-                                            onClick={clickedFooterLink.bind(null, '/about')}>
-                                            About USAspending
-                                        </a>
-                                    </li>
-                                </ul>
+                                <div className="link-group">
+                                    <div className="group-title">
+                                        Help
+                                    </div>
+                                    <ul className="links">
+                                        <li>
+                                            <FooterExternalLink
+                                                link="https://usaspending-help.zendesk.com/hc/en-us/sections/115000739433-Frequently-Ask-Questions-"
+                                                title="FAQs" />
+                                        </li>
+                                        <li>
+                                            <FooterExternalLink
+                                                link="https://usaspending-help.zendesk.com/hc/en-us/community/topics"
+                                                title="Community" />
+                                        </li>
+                                        <li>
+                                            <a
+                                                href="mailto:usaspending.help-submitonly@fiscal.treasury.gov?subject=Contact%20Us"
+                                                onClick={clickedFooterLink.bind(
+                                                    null,
+                                                    'mailto:usaspending.help-submitonly@fiscal.treasury.gov?subject=Contact%20Us'
+                                                )}>
+                                                Contact Us
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div className="link-group">
+                                    <div className="group-title">
+                                        Resources
+                                    </div>
+                                    <ul className="links">
+                                        <li>
+                                            <FooterExternalLink
+                                                link="http://fedspendingtransparency.github.io/DAIMS-v1.1/"
+                                                title="Data Model" />
+                                        </li>
+                                        <li>
+                                            <FooterExternalLink
+                                                link="https://datalab.usaspending.gov"
+                                                title="Data Lab" />
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div className="link-group">
+                                    <div className="group-title">
+                                        Developers
+                                    </div>
+                                    <ul className="links">
+                                        <li>
+                                            <FooterExternalLink
+                                                link="https://api.usaspending.gov"
+                                                title="API" />
+                                        </li>
+                                        <li>
+                                            <FooterExternalLink
+                                                link="https://github.com/fedspendingtransparency/usaspending-website/tree/master"
+                                                title="Explore the Code" />
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
-                            <div className="link-group">
-                                <div className="group-title">
-                                    Help
-                                </div>
-                                <ul className="links">
-                                    <li>
-                                        <FooterExternalLink
-                                            link="https://usaspending-help.zendesk.com/hc/en-us/sections/115000739433-Frequently-Ask-Questions-"
-                                            title="FAQs" />
-                                    </li>
-                                    <li>
-                                        <FooterExternalLink
-                                            link="https://usaspending-help.zendesk.com/hc/en-us/community/topics"
-                                            title="Community" />
-                                    </li>
-                                    <li>
-                                        <a
-                                            href="mailto:usaspending.help-submitonly@fiscal.treasury.gov?subject=Contact%20Us"
-                                            onClick={clickedFooterLink.bind(
-                                                null,
-                                                'mailto:usaspending.help-submitonly@fiscal.treasury.gov?subject=Contact%20Us'
-                                            )}>
-                                            Contact Us
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div className="link-group">
-                                <div className="group-title">
-                                    Resources
-                                </div>
-                                <ul className="links">
-                                    <li>
-                                        <FooterExternalLink
-                                            link="http://fedspendingtransparency.github.io/DAIMS-v1.1/"
-                                            title="Data Model" />
-                                    </li>
-                                    <li>
-                                        <FooterExternalLink
-                                            link="https://datalab.usaspending.gov"
-                                            title="Data Lab" />
-                                    </li>
-                                </ul>
-                            </div>
-                            <div className="link-group">
-                                <div className="group-title">
-                                    Developers
-                                </div>
-                                <ul className="links">
-                                    <li>
-                                        <FooterExternalLink
-                                            link="https://api.usaspending.gov"
-                                            title="API" />
-                                    </li>
-                                    <li>
-                                        <FooterExternalLink
-                                            link="https://github.com/fedspendingtransparency/usaspending-website/tree/master"
-                                            title="Explore the Code" />
-                                    </li>
-                                </ul>
+                            <div className="footer-insight">
+                                <InsightsButtonContainer />
                             </div>
                         </div>
                     </div>

@@ -1,0 +1,46 @@
+.insights__header {
+    width: 100%;
+    height: rem(66);
+    background-color: #009378;
+    padding: 0 rem(10);
+
+    @include display(flex);
+    @include justify-content(space-between)
+    @include align-items(center);
+
+    .insights__title {
+        @include flex(1 1 auto);
+
+        @include display(flex);
+        @include justify-content(flex-start);
+        @include align-items(center);
+    }
+
+    img.insights__title-icon {
+        @include flex(0 0 rem(24));
+        width: rem(24);
+    }
+
+    h2.insights__title-text {
+        color: $color-white;
+        font-family: 'Barlow Semi Condensed', sans-serif;
+        font-style: italic;
+        font-weight: $font-bold;
+        font-size: rem(24);
+        text-transform: uppercase;
+        line-height: 1;
+        margin: 0;
+        margin-left: rem(10);
+    }
+
+    button.insights__close {
+        @include flex(0 0 rem(20));
+        @include button-unstyled;
+
+        svg {
+            width: rem(20);
+            height: rem(20);
+            fill: $color-white;
+        }
+    }
+}

@@ -3,6 +3,7 @@ import Cookies from 'js-cookie';
 
 import GlossaryContainer from 'containers/glossary/GlossaryContainer';
 import RedirectModalContainer from 'containers/redirectModal/RedirectModalContainer';
+import InsightsPanelContainer from 'containers/insights/InsightsPanelContainer';
 import kGlobalConstants from 'GlobalConstants';
 import Analytics from 'helpers/analytics/Analytics';
 
@@ -127,6 +128,7 @@ export default class Header extends React.Component {
                 </header>
                 <GlossaryContainer />
                 <RedirectModalContainer />
+                <InsightsPanelContainer />
             </div>
         );
     }

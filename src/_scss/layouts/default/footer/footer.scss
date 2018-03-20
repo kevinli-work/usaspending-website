@@ -19,14 +19,18 @@
         @include pad(0 0 rem(30));
         max-width: $site-max-width;
         @include media($footer-horizontal) {
-            @include pad(0 rem(30) rem(60));
+            @include pad(0 rem(30) rem(30));
             @include display(flex);
             @include align-items(flex-start);
             @include justify-content(flex-start);
         }
 
+        .footer-content {
+            @include flex(0 1 auto);
+        }
         @import "./_footerLogo";
         @import "./_footerLinks";
+        @import "./_footerInsight";
     }
 
 
